@@ -1,6 +1,6 @@
 <?php
 
-class Super
+class GenTree
 {
 
     // массив после парсинга файла
@@ -13,6 +13,7 @@ class Super
      */
     static public final function createTree($parent = '', $type = '', $relation = '')
     {
+
         self::$arrayReturn = [];
         $return = [];
 

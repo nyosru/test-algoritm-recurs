@@ -1,6 +1,6 @@
 <?php
 
-require 'super.class.php';
+require 'GenTree.class.php';
 
 try {
 
@@ -8,11 +8,11 @@ try {
     $memory = memory_get_usage();
     $start = microtime(true);
 
-    Super::readFile();
+    GenTree::readFile();
 
-    Super::createTree();
+    GenTree::createTree();
 
-    file_put_contents( 'output.json' , json_encode(Super::$arrayReturn , JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT ) );
+    file_put_contents( 'output.json' , json_encode(GenTree::$arrayReturn , JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT ) );
 
     echo '<a href="output.json" target="_blank" >открыть результат JSON</a>';
 
