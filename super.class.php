@@ -11,18 +11,20 @@ class Super
     /**
      * формируем массив дерева и пишем его в self::$arrayReturn
      */
-    static public function createTree($parent = '', $type = '', $relation = '')
+    static public final function createTree($parent = '', $type = '', $relation = '')
     {
         self::$arrayReturn = [];
         $return = [];
 
         foreach (self::$arrayParser as $v) {
 
+
             if (empty($parent)) {
                 if (
                     empty($v['parent']) &&
                     $v['type'] == 'Изделия и компоненты'
                 ) {
+
                     self::$arrayReturn[] = [
                         'itemName' => $v['itemName'],
                         'children' => self::createTree($v['itemName'], $v['type'])
@@ -54,11 +56,7 @@ class Super
 
                 // если какое либо условие прошло, то добавляем элемент в массив результата                
                 if ($add === true) {
-                    $return[] = [
-                        'itemName' => $v['itemName'],
-                        'parent' => $parent,
-                        'children' => self::createTree($v['itemName'], $v['type'], $v['relation'])
-                    ];
+                    $return[] = self::addChildren($v, $parent);
                 }
             }
         }
@@ -66,11 +64,21 @@ class Super
         return $return;
     }
 
+    static private final function addChildren($v = [], $parent)
+    {
+        $return = [
+            'itemName' => $v['itemName'],
+            'parent' => $parent,
+            'children' => self::createTree($v['itemName'], $v['type'], $v['relation'])
+        ];
+        return $return;
+    }
+
 
     /**
      * читаем csv файл в массив "парсер"
      */
-    static public function readFile($file = 'input.csv')
+    static public final function readFile($file = 'input.csv')
     {
 
         self::$arrayParser = [];
@@ -84,22 +92,61 @@ class Super
             3 => 'relation'
         ];
 
-        if (($handle = fopen('./data/' . $file, "r")) !== FALSE) {
-            while (($data = fgetcsv($handle, 3000, ';')) !== FALSE) {
+        $dataFile = './data/' . $file;
+
+        // read file version #1
+        // отключено // норм решение (второй более универсальный)
+        if (1 == 2) {
+
+            if (($handle = fopen($dataFile, "r")) !== FALSE) {
+                while (($data = fgetcsv($handle, 1000, ';')) !== FALSE) {
+                    if ($skip1) {
+                        $da = [];
+                        foreach ($head as $k => $v) {
+                            $da[$v] = $data[$k];
+                        }
+                        self::$arrayParser[] = $da;
+                    } else {
+                        $skip1 = true;
+                    }
+                }
+                fclose($handle);
+            }
+        }
+        // read file version #2
+        // включено // 
+        // вариант чтения файла свежим подходом ... по памяти и времени нет изменений боллее 30% с первым вариантом
+        else {
+
+            $iterator = self::readTheFile($dataFile);
+
+            // прокручиваем весь файл (так для экономии памяти)
+            foreach ($iterator as $str) {
+
+                $data = str_getcsv($str, ';');
 
                 if ($skip1) {
-
                     $da = [];
                     foreach ($head as $k => $v) {
                         $da[$v] = $data[$k];
                     }
-
                     self::$arrayParser[] = $da;
                 } else {
                     $skip1 = true;
                 }
             }
-            fclose($handle);
+        }
+    }
+
+    // read file version #2
+    // функция для чтения дата файла №2
+    static private function readTheFile($path)
+    {
+        $file = new SplFileObject($path);
+        while (!$file->eof()) {
+            $str = $file->current();
+            $file->next();
+            yield $str;
         }
     }
 }
