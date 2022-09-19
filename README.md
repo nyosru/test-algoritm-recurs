@@ -1,110 +1,64 @@
-# вот из ит
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
- Тестовый скрипт
- 
-# как установить
+<p align="center">
+<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
- клонируете репозиторий на хостинг в корневую папку и обращаетесь в корень файл /index.php
- 
-# что как проходит
+## About Laravel
 
-1) парсим файл /data/input.csv
-2) формируем массив с деревом
-3) записываем массив в файл /output.json (ссылка показывается при вызове)
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-# задание
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Написать программу gentree используя PHP7.1, генерирующую JSON файл на основе входящего CSV файла.
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-Программа принимает в качестве параметров командной строки:
-1) Путь к входящему файлу в формате CSV (input.csv)
-2) Путь для выгружаемого файла (output.json)
+## Learning Laravel
 
-Описание:
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-1) Файл input.csv - это пример файла который будет передан в программу. 
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-В нем находится дерево в табличном представлении. 
+## Laravel Sponsors
 
-Связь ребенок-родитель между элементами осуществляется через колонки Item Name и Parent.
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-Колонка Item Name содержит уникальные имена элементов.
+### Premium Partners
 
-Дерево имеет 3 типа элементов (см. колонку Type): 
-    'Изделия и компоненты',
-    'Варианты комплектации',
-    'Прямые компоненты'.
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Cubet Techno Labs](https://cubettech.com)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[Many](https://www.many.co.uk)**
+- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
+- **[DevSquad](https://devsquad.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[OP.GG](https://op.gg)**
+- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+- **[Lendio](https://lendio.com)**
 
-2) Каждый элемент типа 
-    'Прямые компоненты' 
-        имеет возможное продолжение через связь с элементом типа 
-        'Изделия и компоненты', 
-            эта связь указана в колонке 'Relation'. 
+## Contributing
 
-    Необходимо построить продолжение дерева, 
-    присоединив к каждому элементу типа 
-        'Прямые компоненты' 
-    ветку элемента типа 
-        'Изделия и компоненты' 
-    используя эту связь.
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-В результате должно получится дерево представленное в прикрепленном к заданию output.json, которое необходимо сохранить на диск.
+## Code of Conduct
 
-3) Тип элементов 'Варианты комплектации' не используется в генерации веток через колонку 'Relation', для них значение колонки Relation всегда пустое, но они присутствуют как элементы дерева при генерации связей через 'Прямые компоненты' и 'Изделия и компоненты' (пункт 2), далее в примере и в прикрепленном файле output.json можно это увидеть.
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
+## Security Vulnerabilities
 
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-Рассмотрим небольшой кейс на примере самого первого элемента типа 'Прямые компоненты', видим вот такую исходную ветку:
+## License
 
-- Total
-    - ПВЛ
-        - Стандарт.#1
-            - Тележка Б25.#2
-            
-Элемент 'Тележка Б25.#2' имеет тип 'Прямые компоненты' и согласно колонке 'Relation' имеет связь с элементом 'Тележка Б25' типа 'Изделия и компоненты'
-Значит необходимо к элементу 'Тележка Б25.#2' присоединить дерево которое входит в элемент 'Тележка Б25', получаем:
-
-- Total
-    - ПВЛ
-        - Стандарт.#1
-            - Тележка Б25.#2
-                - Стандарт.#5
-                    - РБ ЦДЛР.9855.00.02.000.#17
-                    - БН ЦДЛР.9855.00.01.000.#18
-                    - Колесная пара 25 т.#19
-                ... <- мы опустили дальше элементы для уменьшения кейса с примером
-                
-Получив такое дерево, мы должны продолжить его генерацию дальше, так элемент 'РБ ЦДЛР.9855.00.02.000.#17' имеет связь с элементом 'РБ ЦДЛР.9855.00.02.000' через колонку 'Relation', а элемент 'БН ЦДЛР.9855.00.01.000.#18' с 'БН ЦДЛР.9855.00.01.000' и элемент 'Колесная пара 25 т.#19' с 'Колесная пара 25 т'
-Достраиваем ветки и получаем:
-
-- Total
-    - ПВЛ
-        - Стандарт.#1
-            - Тележка Б25.#2
-                - Стандарт.#5
-                    - РБ ЦДЛР.9855.00.02.000.#17
-                    - БН ЦДЛР.9855.00.01.000.#18
-                    - Колесная пара 25 т.#19
-                        - Стандарт.#10
-                            - Колесо 25т.#52
-                            - Ось 25т.#53
-                ... 
-                            
-Далее пробуем подцепить к 'Колесо 25т.#52' и 'Ось 25т.#53' продолжение как ранее мы сделали с 'Колесная пара 25 т.#19', но из-за отсутствия веток в 'Колесо 25т' и 'Ось 25т' мы останавливаемся и переходим к другим элементам продолжая генерацию дерева пока не достигнем для каждой ветки дерева конца из-за отсутствия вложенности у элементов типа 'Изделия и компоненты'
-
-Пример полной генерации смотри в файле output.json который прикреплен к заданию
-
-Дополнения:
-- Входящий CSV файл в кодировке UTF-8, разделитель точка с запятой, экранирование двойными кавычками
-- Алгоритм должен быть универсален и учитывать любое кол-во входящих строк, но максимально ожидаемый объем входящего файла можно ограничить проверкой на 20 тыс строк
-- Колонки входящего файла строго фиксированы, файл всегда имеет 4 колонки вида и порядка представленном в input.csv
-- Входящие данные гарантируют отсутствие бесконечных рекурсий
-- Исходящий JSON файл в кодировке UTF-8
-
-Решение представить в виде архива с исходным кодом, либо в виде ссылки на онлайн Git-репозиторий
-Код должен собираться и запускаться под Ubuntu/Debian, а так же иметь README по сборке и запуску.
-
-Критерии оценки решения:
-1) Качество архитектуры приложения и читабельность кода, легкость дальнейшего развития и поддержки, уровень абстрактности кода, уровень модульности, качество применения ООП. (Решения в виде портянки кода в одном файле не будут рассматриваться)
-2) Правильность выдаваемых результатов и наличие тестов
-3) Скорость работы и потребление памяти
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
